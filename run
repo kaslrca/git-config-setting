@@ -1,0 +1,20 @@
+git config --global push.default=simple
+
+git config --global merge.tool=sourcetree
+git config --global mergetool.keepbackup=false
+
+git config --global diff.mnemonicprefix=true
+
+git config --global rerere.enabled=true
+
+git config --global commit.template=/Users/windhuang/.gitmessage.template
+
+git config --global alias.lg1=log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+git config --global alias.lg2=log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+git config --global alias.sl=!f()  { git --no-pager  shortlog -n -e --format="%ci %h   %s" ${1}..${2} | grep -v -e "Merge branch" -e "Merged"; }; f
+git config --global alias.ss=status -s
+git config --global alias.co=checkout
+git config --global alias.cm=commit
+git config --global alias.sl2=!f() { git --no-pager  shortlog -n -e --format="%ci %h   %s" $(git for-each-ref  --format '%(refname)'  refs/tags | grep "refs/tags/v" | sort | tail -1)..$(git branch | grep "^*" | cut -d ' '  -f 2) | grep -v -e "Merge branch" -e "Merged"; }; f
+git config --global alias.gg=!f() { git --no-pager log $@ --format="%C(dim green)%ci%C(reset) %C(dim white)%h%C(reset)  %an  %C(magenta)%s%C(reset)" $(git for-each-ref --format '%(refname)' refs/tags | grep "refs/tags/v" | sort | tail -1)..$(git branch | grep "^*" | cut -d ' ' -f 2) | grep -v -e "Merge branch" -e "Merged"; }; f
+git config --global alias.dsf=!f() { [ "" != "" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX --pattern='^(added|deleted|modified): '; }; f
